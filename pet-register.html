@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro do Pet - Petshop</title>
+    <style>
+        /* Reset e estilos globais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, #ff6cbf, #ffe6cc);
+            color: #333;
+            padding-bottom: 20px; /* Espaço para o rodapé fixo */
+        }
+
+        /* Cabeçalho */
+        header {
+           
+            background: url('https://mir-s3-cdn-cf.behance.net/project_modules/1400/41c548103244921.5f4916abb5157.jpg') no-repeat center;
+            background-size: 1600px 500px;
+            color: white;
+            padding: 50px;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            position: relative;
+        }
+
+       
+
+        /* Container do formulário */
+        .pet-registration-container {
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #e0e0e0;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pet-registration-container::after {
+            content: '';
+            background: url('https://cdn-icons-png.flaticon.com/512/616/616408.png') no-repeat center;
+            background-size: 200px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        h2 {
+            text-align: center;
+            color: #000000;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ff00aa;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #ffdee9;
+            box-shadow: 0 0 5px rgba(255, 111, 97, 0.5);
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #ffdee9;
+            color: rgb(0, 0, 0);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        button:hover {
+            background-color: #ffdee9;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: #ffdee9;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Responsividade */
+        @media (max-width: 600px) {
+            header {
+                font-size: 1.5rem;
+            }
+
+            .pet-registration-container {
+                padding: 20px;
+            }
+
+            button {
+                font-size: 1rem;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+      
+        Petshop Amigo - Cadastro do Pet
+    </header>
+
+    <main>
+        <section class="pet-registration-container">
+            <h2>Cadastro do Pet</h2>
+            <form id="petRegistrationForm">
+                <div class="form-group">
+                    <label for="petName">Nome do Pet:</label>
+                    <input type="text" id="petName" name="petName" placeholder="Digite o nome do seu pet" required>
+                </div>
+                <div class="form-group">
+                    <label for="petType">Tipo do Pet:</label>
+                    <select id="petType" name="petType" required>
+                        <option value="" disabled selected>Selecione o tipo</option>
+                        <option value="Cachorro">Cachorro</option>
+                        <option value="Gato">Gato</option>
+                        <option value="Pássaro">Pássaro</option>
+                        <option value="Outro">Outro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="petAge">Idade do Pet (em anos):</label>
+                    <input type="number" id="petAge" name="petAge" placeholder="Digite a idade do pet" required>
+                </div>
+                <div class="form-group">
+                    <label for="petWeight">Peso do Pet (em kg):</label>
+                    <input type="number" id="petWeight" name="petWeight" step="0.1" placeholder="Digite o peso do pet" required>
+                </div>
+                <button type="submit">Cadastrar Pet</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Petshop Amigo - Todos os direitos reservados. </p>
+    </footer>
+</body>
+</html>
+
+
+
+
+<!-- @RestController
+@RequestMapping("/api")
+public class PetController {
+
+    @PostMapping("/pets")
+    public ResponseEntity<?> registerPet(@RequestBody Pet pet) {
+        if (pet.getPetName() == null || pet.getPetType() == null) {
+            return ResponseEntity.badRequest().body("Dados do pet inválidos");
+        }
+        // Lógica para salvar no banco (simulação)
+        return ResponseEntity.ok("Pet cadastrado com sucesso");
+    }
+
+    public static class Pet {
+        private String petName;
+        private String petType;
+        private int petAge;
+        private double petWeight;
+
+        // Getters e Setters
+    }
+} -->
